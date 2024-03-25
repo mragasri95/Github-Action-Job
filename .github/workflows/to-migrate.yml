@@ -1,0 +1,35 @@
+name: To-migrate
+on:
+  workflow_dispatch:
+jobs:
+  scanning:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - name: echo message
+      run: echo executing scanning
+  build:
+    runs-on: ubuntu-latest
+    needs: scanning
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - name: echo message
+      run: echo building
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - name: echo message
+      run: echo testing
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - name: echo message
+      run: echo deploying
